@@ -48,7 +48,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/cli@npm:^0.1.46":
+"@swc/cli@npm:0.1.46":
   version: 0.1.46
   resolution: "@swc/cli@npm:0.1.46"
   dependencies:
@@ -153,7 +153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/core@npm:^1.2.76":
+"@swc/core@npm:1.2.76":
   version: 1.2.76
   resolution: "@swc/core@npm:1.2.76"
   dependencies:
@@ -206,6 +206,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ansi-colors@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "ansi-colors@npm:4.1.1"
+  checksum: 138d04a51076cb085da0a7e2d000c5c0bb09f6e772ed5c65c53cb118d37f6c5f1637506d7155fb5f330f0abcf6f12fa2e489ac3f8cdab9da393bf1bb4f9a32b0
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -254,6 +261,30 @@ __metadata:
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
   checksum: 902a9f5d8967a3e2faf138d5cb784b9979bad2e6db5357c5b21c568df4ebe62bcb15108af1b2253744844eb964fc023fbd9afbbbb6ddd0bcc204c6fb5b7bf3af
+  languageName: node
+  linkType: hard
+
+"create-si@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "create-si@workspace:."
+  dependencies:
+    "@swc/cli": 0.1.46
+    "@swc/core": 1.2.76
+    "@types/node": 16.6.0
+    clipanion: ^3.0.1
+    enquirer: ^2.3.6
+    prettier: 2.3.2
+    rimraf: 3.0.2
+    typescript: 4.3.5
+  languageName: unknown
+  linkType: soft
+
+"enquirer@npm:^2.3.6":
+  version: 2.3.6
+  resolution: "enquirer@npm:2.3.6"
+  dependencies:
+    ansi-colors: ^4.1.1
+  checksum: 1c0911e14a6f8d26721c91e01db06092a5f7675159f0261d69c403396a385afd13dd76825e7678f66daffa930cfaa8d45f506fb35f818a2788463d022af1b884
   languageName: node
   linkType: hard
 
@@ -430,7 +461,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^3.0.2":
+"rimraf@npm:3.0.2":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:
@@ -449,20 +480,6 @@ __metadata:
   checksum: cb4f97ad25a75ebc11a8ef4e33bb962f8af8516bb2001082ceabd8902e15b98f4b84b4f8a9b222e5d57fc3bd1379c483886ed4619367a7680dad65316993021d
   languageName: node
   linkType: hard
-
-"simple-icons-create-cli@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "simple-icons-create-cli@workspace:."
-  dependencies:
-    "@swc/cli": ^0.1.46
-    "@swc/core": ^1.2.76
-    "@types/node": 16.6.0
-    clipanion: ^3.0.1
-    prettier: 2.3.2
-    rimraf: ^3.0.2
-    typescript: 4.3.5
-  languageName: unknown
-  linkType: soft
 
 "slash@npm:3.0.0":
   version: 3.0.0
