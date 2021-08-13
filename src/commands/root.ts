@@ -83,7 +83,8 @@ class RootCommand extends Command {
       {
         type: 'select',
         name: 'precision',
-        message: 'pick precision for svgo',
+        message:
+          'pick precision for svgo (keep it at 3 unless there is a loss of quality)',
         required: true,
         choices: ['3', '4', '5'],
       },
@@ -119,25 +120,49 @@ class RootCommand extends Command {
 
     let dataSlug = slug === suggestedSlug ? undefined : slug
 
-    const foundIcon = iconsData.find(
+    const foundIconIndex = iconsData.findIndex(
       ({ title: iconTitle, slug: iconSlug }) =>
         title === iconTitle && iconSlug === dataSlug
     )
+    const foundIcon = iconsData[foundIconIndex]
 
-    if (foundIcon)
-      console.log(
-        chalk.red(
-          `Error, there are two icons with the title ${title} and slug ${dataSlug}. If this is intentional, make sure to change one of their slugs.`
-        )
-      )
-
-    iconsData.push({
+    const newIconData = {
       title,
       hex,
       source,
       slug: dataSlug,
       guidelines: guidelines === '' ? undefined : guidelines,
-    })
+    }
+
+    // option to overwrite if an icon already exists
+    if (foundIcon) {
+      const { shouldOverwrite }: { shouldOverwrite: boolean } = await prompt({
+        type: 'confirm',
+        name: 'shouldOverwrite',
+        message: `Found two icons with the title ${title} and slug ${dataSlug}. Would you like to overwrite with the newer icon data?`,
+        required: true,
+      })
+
+      console.log(shouldOverwrite)
+
+      if (shouldOverwrite)
+        // overwrite merges objects, but replaces with the new icon data
+        iconsData[foundIconIndex] = {
+          ...foundIcon,
+          ...newIconData,
+        }
+      else {
+        const error = new Error(
+          'There cannot be two icons with the same title and slug.'
+        )
+        error.name = 'Conflict'
+        error.stack = undefined
+
+        throw error
+      }
+
+      // if icon does not already exist, push the new icon
+    } else iconsData.push(newIconData)
 
     iconsData.sort((prev, curr) => {
       const titleComparison = prev.title.localeCompare(curr.title)
@@ -157,6 +182,7 @@ class RootCommand extends Command {
 
     writeFileSync(jsonDataPath, serializedIconsData, 'utf-8')
 
+    // write file before lint (svglint needs to point at a file)
     const iconSvgFilename = `${slug}.svg`
     const iconSvgFilePath = join('icons', iconSvgFilename)
     writeFileSync(iconSvgFilePath, iconXml, 'utf-8')
@@ -182,9 +208,11 @@ class RootCommand extends Command {
     // @ts-expect-error execa only throws an error after execution
     // so `execaValue` will have a value
     if (execaValue?.exitCode !== 0) {
+      const svglintCommand = chalk.bold(`npx svglint ${iconSvgFilePath} --ci`)
+
       console.log(
         chalk.red(
-          'Exiting with linting errors. Make sure to fix them before creating a PR.'
+          `Make sure to fix these errors before creating a PR. Re-run svglint with ${svglintCommand}.`
         )
       )
 
@@ -200,7 +228,7 @@ class RootCommand extends Command {
 
     const lineLink = `${jsonDataPath}:${lineCount}`
 
-    console.log(chalk.blue(`Adjust JSON data at ${lineLink}`))
+    console.log(chalk.blue(`Edit JSON data at ${lineLink}`))
 
     return exitCode
   }
