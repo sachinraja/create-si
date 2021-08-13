@@ -38,6 +38,8 @@ class RootCommand extends Command {
       },
     ])
 
+    // save suggestedSlug to know whether to create a field
+    // in the JSON data or not
     const suggestedSlug = titleToSlug(title)
 
     const {
@@ -71,7 +73,7 @@ class RootCommand extends Command {
       {
         type: 'input',
         name: 'slug',
-        message: 'slug',
+        message: 'slug (use suggested [hit enter] unless absolutely necessary)',
         initial: suggestedSlug,
         required: true,
       },
@@ -97,7 +99,7 @@ class RootCommand extends Command {
     // @ts-expect-error this does not require any arguments
     const config = await loadConfig()
 
-    // run through svgo
+    // run svgo
     const { data: resultXMLStr } = optimize(rawXMLStr, {
       path: filepath,
       ...config,
@@ -118,12 +120,20 @@ class RootCommand extends Command {
       guidelines?: string
     }[] = JSON.parse(readFileSync(jsonDataPath, 'utf-8')).icons
 
-    let dataSlug = slug === suggestedSlug ? undefined : slug
+    const normalizedInputSlug = titleToSlug(slug)
+
+    const isInputSlugSame = normalizedInputSlug === suggestedSlug
+
+    let dataSlug = isInputSlugSame ? undefined : normalizedInputSlug
 
     const foundIconIndex = iconsData.findIndex(
-      ({ title: iconTitle, slug: iconSlug }) =>
-        title === iconTitle && iconSlug === dataSlug
+      ({ title: iconTitle, slug: iconSlug }) => {
+        // if the icon slugs match, the icons are conflicting
+        if (iconSlug) return normalizedInputSlug === iconSlug
+        else return normalizedInputSlug === titleToSlug(iconTitle)
+      }
     )
+
     const foundIcon = iconsData[foundIconIndex]
 
     const newIconData = {
@@ -139,11 +149,9 @@ class RootCommand extends Command {
       const { shouldOverwrite }: { shouldOverwrite: boolean } = await prompt({
         type: 'confirm',
         name: 'shouldOverwrite',
-        message: `Found two icons with the title ${title} and slug ${dataSlug}. Would you like to overwrite with the newer icon data?`,
+        message: `Found two icons with the slug ${normalizedInputSlug}. Would you like to overwrite with the newer icon data?`,
         required: true,
       })
-
-      console.log(shouldOverwrite)
 
       if (shouldOverwrite)
         // overwrite merges objects, but replaces with the new icon data
@@ -187,7 +195,7 @@ class RootCommand extends Command {
     const iconSvgFilePath = join('icons', iconSvgFilename)
     writeFileSync(iconSvgFilePath, iconXml, 'utf-8')
 
-    // lint
+    // run svglint
     console.log(chalk.bold.cyan('Running svglint...'))
 
     let execaValue: ExecaReturnValue<string>
@@ -203,7 +211,7 @@ class RootCommand extends Command {
       insideProc.stdout?.pipe(process.stdout)
 
       execaValue = await insideProc
-    } catch (e) {}
+    } catch {}
 
     // @ts-expect-error execa only throws an error after execution
     // so `execaValue` will have a value
