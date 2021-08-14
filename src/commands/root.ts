@@ -105,19 +105,35 @@ class RootCommand extends Command {
 
     const rawXMLStr = readFileSync(filepath, 'utf-8')
 
+    const parsedPrecision = parseInt(precision)
+
     // @ts-expect-error this does not require any arguments
     const config = await loadConfig()
+    const convertPathDataPlugin = config.plugins?.find(
+      // @ts-expect-error plugins have names
+      (plugin) => plugin.name === 'convertPathData'
+    )
+
+    // @ts-expect-error this exists
+    convertPathDataPlugin.params.floatPrecision = parsedPrecision
 
     // run svgo
     const { data: resultXMLStr } = optimize(rawXMLStr, {
-      path: filepath,
       ...config,
-      floatPrecision: parseInt(precision),
+      path: filepath,
+      floatPrecision: parsedPrecision,
     })
 
     // add title to svg
-    const $ = cheerio.load(resultXMLStr, { xmlMode: true })
-    $('svg').prepend(`<title>${title}</title>`)
+    const $ = cheerio.load(resultXMLStr, { xml: true })
+    const svgElement = $('svg')
+    const titleElement = svgElement.find('title')
+
+    const titleElementExists = titleElement.length > 0
+
+    if (titleElementExists) titleElement.text(title)
+    else $('svg').prepend(`<title>${title}</title>`)
+
     const iconXml = $.xml()
 
     const jsonDataPath = join('_data', 'simple-icons.json')
@@ -202,6 +218,7 @@ class RootCommand extends Command {
     // write file before lint (svglint needs to point at a file)
     const iconSvgFilename = `${slug}.svg`
     const iconSvgFilePath = join('icons', iconSvgFilename)
+
     writeFileSync(iconSvgFilePath, iconXml, 'utf-8')
 
     // run svglint
