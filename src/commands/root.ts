@@ -1,4 +1,4 @@
-import { existsSync, fstat, readFileSync, write, writeFileSync } from 'fs'
+import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { Command } from 'clipanion'
 import { prompt } from 'enquirer'
@@ -7,6 +7,7 @@ import cheerio from 'cheerio'
 import chalk from 'chalk'
 import execa, { ExecaReturnValue } from 'execa'
 import titleToSlug from '../utils/title-to-slug'
+import validateUrl from '../utils/validate-url'
 
 class RootCommand extends Command {
   static paths = [Command.Default]
@@ -27,7 +28,7 @@ class RootCommand extends Command {
           const endsWithSvg = val.slice(val.length - 3, val.length) === 'svg'
           const exists = existsSync(val)
 
-          return endsWithSvg && exists
+          return endsWithSvg && exists ? true : 'file does not exist'
         },
       },
       {
@@ -61,7 +62,7 @@ class RootCommand extends Command {
         message: 'hex',
         required: true,
         validate(val) {
-          return /^#?[0-9A-F]{6}$/i.test(val)
+          return /^#?[0-9A-F]{6}$/i.test(val) ? true : 'not a valid hex'
         },
       },
       {
@@ -69,6 +70,9 @@ class RootCommand extends Command {
         name: 'source',
         message: 'source (link)',
         required: true,
+        validate(val) {
+          return validateUrl(val)
+        },
       },
       {
         type: 'input',
@@ -81,6 +85,11 @@ class RootCommand extends Command {
         type: 'input',
         name: 'guidelines',
         message: 'guidelines (link, leave blank if none)',
+        validate(val) {
+          if (val === '') return true
+
+          return validateUrl(val)
+        },
       },
       {
         type: 'select',
@@ -144,17 +153,17 @@ class RootCommand extends Command {
       guidelines: guidelines === '' ? undefined : guidelines,
     }
 
-    // option to overwrite if an icon already exists
+    // option to merge if an icon already exists
     if (foundIcon) {
-      const { shouldOverwrite }: { shouldOverwrite: boolean } = await prompt({
+      const { shouldMerge }: { shouldMerge: boolean } = await prompt({
         type: 'confirm',
-        name: 'shouldOverwrite',
-        message: `Found two icons with the slug ${normalizedInputSlug}. Would you like to overwrite with the newer icon data?`,
+        name: 'shouldMerge',
+        message: `Found two icons with the slug ${normalizedInputSlug}. Would you like to merge with the newer icon data?`,
         required: true,
       })
 
-      if (shouldOverwrite)
-        // overwrite merges objects, but replaces with the new icon data
+      if (shouldMerge)
+        // replaces with the new icon data
         iconsData[foundIconIndex] = {
           ...foundIcon,
           ...newIconData,

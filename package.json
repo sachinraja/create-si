@@ -1,6 +1,6 @@
 {
   "name": "create-si",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a simple cli tool for creating new simple-icons",
   "bin": "dist/bin.js",
   "files": [
