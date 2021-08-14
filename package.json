@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "a simple cli tool for creating new simple-icons",
   "bin": "dist/bin.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf dist && swc src -d dist",
     "format": "prettier --write .",
