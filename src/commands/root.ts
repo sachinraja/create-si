@@ -222,6 +222,8 @@ class RootCommand extends Command {
       execaValue = await insideProc
     } catch {}
 
+    const iconsMessage = `${title} icon`
+
     // @ts-expect-error execa only throws an error after execution
     // so `execaValue` will have a value
     if (execaValue?.exitCode !== 0) {
@@ -229,13 +231,13 @@ class RootCommand extends Command {
 
       console.log(
         chalk.red(
-          `Make sure to fix these errors before creating a PR. Re-run svglint with ${svglintCommand}.`
+          `Created ${iconsMessage} with errors. Make sure to fix them before creating a PR. Re-run svglint with ${svglintCommand}.`
         )
       )
 
       // @ts-expect-error
       exitCode = execaValue?.exitCode ?? 1
-    } else console.log(chalk.green(`Successfully created ${title} icon.`))
+    } else console.log(chalk.green(`Successfully created ${iconsMessage}.`))
 
     const sourceIndex = serializedIconsData.indexOf(`"title": "${title}"`)
 
