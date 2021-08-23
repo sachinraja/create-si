@@ -10,4 +10,5 @@
       automerge: false,
     },
   ],
+  requiredStatusChecks: null,
 }
