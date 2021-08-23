@@ -48,16 +48,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@swc/cli@npm:0.1.46":
-  version: 0.1.46
-  resolution: "@swc/cli@npm:0.1.46"
+"@swc/cli@npm:0.1.49":
+  version: 0.1.49
+  resolution: "@swc/cli@npm:0.1.49"
   dependencies:
     commander: ^7.1.0
     fast-glob: ^3.2.5
     slash: 3.0.0
     source-map: ^0.7.3
   peerDependencies:
-    "@swc/core": ^1.2.4
+    "@swc/core": ^1.2.66
     chokidar: ^3.5.1
   peerDependenciesMeta:
     chokidar:
@@ -65,7 +65,7 @@ __metadata:
   bin:
     spack: bin/spack.js
     swc: bin/swc.js
-  checksum: a81cdec353df63b26d4bcd9d74ffb00a390280b9f3186a21fceb97bc4c8e452526f7165a6ef059831e4590bd005a8786232d6bc3d6ef9fe07fdf3134d73e8db7
+  checksum: 2d5c253d913aa57a019fbad152cd49e01d06bf20a736ff9c49d6ee7db1378723d442ac274bc0cffc367bf8fae485f11dbf7e96b871a8b84a8eea03a87de3c17c
   languageName: node
   linkType: hard
 
@@ -375,7 +375,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "create-si@workspace:."
   dependencies:
-    "@swc/cli": 0.1.46
+    "@swc/cli": 0.1.49
     "@swc/core": 1.2.76
     "@swc/register": 0.1.7
     "@types/node": 16.6.0
