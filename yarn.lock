@@ -229,10 +229,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/svgo@npm:2.3.1":
-  version: 2.3.1
-  resolution: "@types/svgo@npm:2.3.1"
-  checksum: c545b5dcf07970b9db99b3073760c1b3030418d36753d3158387b8ab05ba50e4da88dfbce443e30bda1f4a43d340ee98b481fda55e6219c563b785b4828427d3
+"@types/svgo@npm:2.4.0":
+  version: 2.4.0
+  resolution: "@types/svgo@npm:2.4.0"
+  checksum: 587b41f56a71998f3df7e7f48e517c55f93c7b289e7b6e29eb40473567065f166e58d382a738ad95b83b9e1e8b6eba5285f969717f3a9715f533dd26f00f64d7
   languageName: node
   linkType: hard
 
@@ -379,7 +379,7 @@ __metadata:
     "@swc/core": 1.2.80
     "@swc/register": 0.1.7
     "@types/node": 16.6.0
-    "@types/svgo": 2.3.1
+    "@types/svgo": 2.4.0
     chalk: ^4.1.2
     cheerio: ^1.0.0-rc.10
     clipanion: ^3.0.1
