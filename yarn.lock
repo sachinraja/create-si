@@ -222,6 +222,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:*":
+  version: 16.7.10
+  resolution: "@types/node@npm:16.7.10"
+  checksum: 0518803caa1a14f4070e770a280eda1c4b4581a425cbda481cdd54b1f34a7ea497ff067fd23b90e3d4f4fdcfba15c1316182875e9cf9f5b2e880de1e595de053
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:16.6.0":
   version: 16.6.0
   resolution: "@types/node@npm:16.6.0"
@@ -229,10 +236,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/svgo@npm:2.4.0":
-  version: 2.4.0
-  resolution: "@types/svgo@npm:2.4.0"
-  checksum: 587b41f56a71998f3df7e7f48e517c55f93c7b289e7b6e29eb40473567065f166e58d382a738ad95b83b9e1e8b6eba5285f969717f3a9715f533dd26f00f64d7
+"@types/svgo@npm:2.4.1":
+  version: 2.4.1
+  resolution: "@types/svgo@npm:2.4.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: d95f45799887a255f4c2926f3319e0644d06506d3f9623ec325f1a9e8d8334ab5a587c48fdac0c39a9c6c4a6d15ab37d8e8ff7a2d0d01e1fc2a85ef92fa058ff
   languageName: node
   linkType: hard
 
@@ -379,7 +388,7 @@ __metadata:
     "@swc/core": 1.2.84
     "@swc/register": 0.1.7
     "@types/node": 16.6.0
-    "@types/svgo": 2.4.0
+    "@types/svgo": 2.4.1
     chalk: ^4.1.2
     cheerio: ^1.0.0-rc.10
     clipanion: ^3.0.1
