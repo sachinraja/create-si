@@ -5,7 +5,7 @@ A cli tool for creating new [simple-icons](https://github.com/simple-icons/simpl
 ## Installation
 
 ```bash
-npm i create-si
+npm i create-si -g
 ```
 
 ## Usage
