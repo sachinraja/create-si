@@ -22,31 +22,34 @@
   },
   "homepage": "https://github.com/sachinraja/create-si#readme",
   "scripts": {
-    "build": "rimraf dist && swc src -d dist",
-    "format": "prettier --write .",
-    "type-check": "tsc",
-    "type-gen": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
+    "build": "pnpm clean && tsup src/bin.ts --format cjs",
+    "format": "prettier -w .",
+    "lint:format": "prettier -c .",
+    "lint:types": "tsc",
     "cli": "node -r @swc/register src/bin.ts",
-    "prepack": "yarn build"
+    "prepublishOnly": "pnpm build"
   },
   "dependencies": {
     "chalk": "^4.1.2",
     "cheerio": "^1.0.0-rc.10",
-    "clipanion": "^3.0.1",
+    "clipanion": "^3.2.0-rc.3",
     "enquirer": "^2.3.6",
     "execa": "^5.1.1",
     "regenerator-runtime": "^0.13.9",
-    "svgo": "^2.3.1"
+    "svgo": "^2.7.0"
   },
   "devDependencies": {
-    "@swc/cli": "0.1.49",
-    "@swc/core": "1.2.80",
+    "@swc/cli": "0.1.51",
+    "@swc/core": "1.2.94",
     "@swc/register": "0.1.7",
     "@types/node": "16.6.0",
-    "@types/svgo": "2.3.1",
-    "prettier": "2.3.2",
+    "@types/simple-icons": "5.8.0",
+    "@types/svgo": "2.6.0",
+    "prettier": "2.4.1",
     "rimraf": "3.0.2",
-    "typescript": "4.3.5"
+    "tsup": "5.4.0",
+    "typescript": "4.4.3"
   },
   "prettier": {
     "semi": false,

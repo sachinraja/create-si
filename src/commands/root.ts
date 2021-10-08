@@ -1,5 +1,5 @@
-import { existsSync, readFileSync, writeFileSync } from 'fs'
-import { join } from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import { Command } from 'clipanion'
 import { prompt } from 'enquirer'
 import { optimize, loadConfig } from 'svgo'
@@ -8,6 +8,7 @@ import chalk from 'chalk'
 import execa, { ExecaReturnValue } from 'execa'
 import titleToSlug from '../utils/title-to-slug'
 import validateUrl from '../utils/validate-url'
+import { SimpleIconData } from '../types'
 
 class RootCommand extends Command {
   static paths = [Command.Default]
@@ -26,7 +27,7 @@ class RootCommand extends Command {
         required: true,
         validate(val) {
           const endsWithSvg = val.slice(val.length - 3, val.length) === 'svg'
-          const exists = existsSync(val)
+          const exists = fs.existsSync(val)
 
           return endsWithSvg && exists ? true : 'file does not exist'
         },
@@ -101,21 +102,30 @@ class RootCommand extends Command {
       },
     ])
 
+    let normalizedHex: string
+
+    if (hex[0] === '#') normalizedHex = hex.slice(1)
+    else normalizedHex = hex
+
+    normalizedHex = hex.toUpperCase()
+
     console.log(chalk.bold.cyan('Running svgo...'))
 
-    const rawXMLStr = readFileSync(filepath, 'utf-8')
+    const rawXMLStr = fs.readFileSync(filepath, 'utf-8')
 
     const parsedPrecision = parseInt(precision)
 
     // @ts-expect-error this does not require any arguments
     const config = await loadConfig()
-    const convertPathDataPlugin = config.plugins?.find(
+    console.log(config.plugins)
+    const presetDefaultPlugin = config.plugins?.find(
       // @ts-expect-error plugins have names
-      (plugin) => plugin.name === 'convertPathData'
+      (plugin) => plugin.name === 'preset-default'
     )
 
     // @ts-expect-error this exists
-    convertPathDataPlugin.params.floatPrecision = parsedPrecision
+    presetDefaultPlugin.params.overrides.convertPathData.floatPrecision =
+      parsedPrecision
 
     // run svgo
     const { data: resultXMLStr } = optimize(rawXMLStr, {
@@ -136,14 +146,10 @@ class RootCommand extends Command {
 
     const iconXml = $.xml()
 
-    const jsonDataPath = join('_data', 'simple-icons.json')
-    const iconsData: {
-      title: string
-      hex: string
-      source: string
-      slug?: string
-      guidelines?: string
-    }[] = JSON.parse(readFileSync(jsonDataPath, 'utf-8')).icons
+    const jsonDataPath = path.join('_data', 'simple-icons.json')
+    const iconsData: SimpleIconData[] = JSON.parse(
+      fs.readFileSync(jsonDataPath, 'utf-8')
+    ).icons
 
     const normalizedInputSlug = titleToSlug(slug)
 
@@ -161,13 +167,14 @@ class RootCommand extends Command {
 
     const foundIcon = iconsData[foundIconIndex]
 
-    const newIconData = {
+    const newIconData: SimpleIconData = {
       title,
-      hex,
+      hex: normalizedHex,
       source,
       slug: dataSlug,
-      guidelines: guidelines === '' ? undefined : guidelines,
     }
+
+    if (guidelines !== '') newIconData.guidelines = guidelines
 
     // option to merge if an icon already exists
     if (foundIcon) {
@@ -213,13 +220,13 @@ class RootCommand extends Command {
       4
     )}\n`
 
-    writeFileSync(jsonDataPath, serializedIconsData, 'utf-8')
+    fs.writeFileSync(jsonDataPath, serializedIconsData, 'utf-8')
 
     // write file before lint (svglint needs to point at a file)
     const iconSvgFilename = `${slug}.svg`
-    const iconSvgFilePath = join('icons', iconSvgFilename)
+    const iconSvgFilePath = path.join('icons', iconSvgFilename)
 
-    writeFileSync(iconSvgFilePath, iconXml, 'utf-8')
+    fs.writeFileSync(iconSvgFilePath, iconXml, 'utf-8')
 
     // run svglint
     console.log(chalk.bold.cyan('Running svglint...'))
