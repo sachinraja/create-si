@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@swc/cli": "0.1.51",
-    "@swc/core": "1.2.106",
+    "@swc/core": "1.2.107",
     "@swc/register": "0.1.7",
     "@types/node": "16.11.6",
     "@types/simple-icons": "5.8.0",
