@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@swc/cli': 0.1.51
+  '@swc/cli': 0.1.52
   '@swc/core': 1.2.108
   '@swc/register': 0.1.7
   '@types/node': 16.11.7
@@ -29,7 +29,7 @@ dependencies:
   svgo: 2.7.0
 
 devDependencies:
-  '@swc/cli': 0.1.51_@swc+core@1.2.108
+  '@swc/cli': 0.1.52_@swc+core@1.2.108
   '@swc/core': 1.2.108
   '@swc/register': 0.1.7_@swc+core@1.2.108
   '@types/node': 16.11.7
@@ -73,8 +73,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@swc/cli/0.1.51_@swc+core@1.2.108:
-    resolution: {integrity: sha512-7eqZGpkI4QOYfF+9FV4xpT/V/LSRDs5OMJcm4Z46JnPMvv+sxumAFdCe1hHRzHgnzwis9OtjI8Tt3Srf9JudQw==}
+  /@swc/cli/0.1.52_@swc+core@1.2.108:
+    resolution: {integrity: sha512-LAWnsTG6BNGinyPN5U0wPKA6OSMX+sl4VUzzo1dpS33V4osLQOXxLdITQnQbfI8zS74ekERvIwa8vvXKXCoc+A==}
     engines: {node: '>= 12.13'}
     hasBin: true
     peerDependencies:
