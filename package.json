@@ -40,7 +40,7 @@
     "svgo": "^2.7.0"
   },
   "devDependencies": {
-    "@swc/cli": "0.1.53",
+    "@swc/cli": "0.1.55",
     "@swc/core": "1.2.119",
     "@swc/register": "0.1.7",
     "@types/node": "16.11.7",
