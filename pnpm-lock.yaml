@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@swc/cli': 0.1.55
   '@swc/core': 1.2.123
-  '@swc/register': 0.1.7
+  '@swc/register': 0.1.8
   '@types/node': 16.11.7
   '@types/simple-icons': 5.8.0
   '@types/svgo': 2.6.0
@@ -31,7 +31,7 @@ dependencies:
 devDependencies:
   '@swc/cli': 0.1.55_@swc+core@1.2.123
   '@swc/core': 1.2.123
-  '@swc/register': 0.1.7_@swc+core@1.2.123
+  '@swc/register': 0.1.8_@swc+core@1.2.123
   '@types/node': 16.11.7
   '@types/simple-icons': 5.8.0
   '@types/svgo': 2.6.0
@@ -229,15 +229,14 @@ packages:
       '@swc/core-win32-x64-msvc': 1.2.123
     dev: true
 
-  /@swc/register/0.1.7_@swc+core@1.2.123:
-    resolution: {integrity: sha512-d1Bxbwhyd2W+Y6HL1O6CoNvt/HmBaMDqFFu4cRRVPRBeEf0tIugJUmyBxlJhooBzqJ11d6THUw0o7JgC7Q2ffA==}
+  /@swc/register/0.1.8_@swc+core@1.2.123:
+    resolution: {integrity: sha512-3Idju0JjKapoth9Gw6Vl9fqX1P5HPACY/S5aqp3N4yh4ghtaNg6WacwzfsgD5pYwVGKf+Kewss89IYkuZJqiSg==}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1.0.46
     dependencies:
       '@swc/core': 1.2.123
       lodash.clonedeep: 4.5.0
-      lodash.escaperegexp: 4.1.2
       pirates: 4.0.1
       source-map-support: 0.5.20
     dev: true
@@ -833,10 +832,6 @@ packages:
 
   /lodash.clonedeep/4.5.0:
     resolution: {integrity: sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=}
-    dev: true
-
-  /lodash.escaperegexp/4.1.2:
-    resolution: {integrity: sha1-ZHYsSGGAglGKw99Mz11YhtriA0c=}
     dev: true
 
   /mdn-data/2.0.14:
