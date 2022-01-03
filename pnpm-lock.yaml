@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@swc/cli': 0.1.55
   '@swc/core': 1.2.125
-  '@swc/register': 0.1.8
+  '@swc/register': 0.1.9
   '@types/node': 16.11.17
   '@types/simple-icons': 5.8.0
   '@types/svgo': 2.6.0
@@ -31,7 +31,7 @@ dependencies:
 devDependencies:
   '@swc/cli': 0.1.55_@swc+core@1.2.125
   '@swc/core': 1.2.125
-  '@swc/register': 0.1.8_@swc+core@1.2.125
+  '@swc/register': 0.1.9_@swc+core@1.2.125
   '@types/node': 16.11.17
   '@types/simple-icons': 5.8.0
   '@types/svgo': 2.6.0
@@ -229,8 +229,8 @@ packages:
       '@swc/core-win32-x64-msvc': 1.2.125
     dev: true
 
-  /@swc/register/0.1.8_@swc+core@1.2.125:
-    resolution: {integrity: sha512-3Idju0JjKapoth9Gw6Vl9fqX1P5HPACY/S5aqp3N4yh4ghtaNg6WacwzfsgD5pYwVGKf+Kewss89IYkuZJqiSg==}
+  /@swc/register/0.1.9_@swc+core@1.2.125:
+    resolution: {integrity: sha512-/HuYKPuzroGPowMmTRmwJ2C0E7isp4bIYdui7pkRqbzY2atW5fsNOb/zNNP6UTRfbuq6yzF1Mtmxw2sPzG2sTQ==}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1.0.46
