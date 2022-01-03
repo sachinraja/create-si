@@ -17,7 +17,7 @@ specifiers:
   rimraf: 3.0.2
   svgo: ^2.7.0
   tsup: 5.11.10
-  typescript: 4.4.4
+  typescript: 4.5.4
 
 dependencies:
   chalk: 4.1.2
@@ -37,8 +37,8 @@ devDependencies:
   '@types/svgo': 2.6.0
   prettier: 2.5.1
   rimraf: 3.0.2
-  tsup: 5.11.10_typescript@4.4.4
-  typescript: 4.4.4
+  tsup: 5.11.10_typescript@4.5.4
+  typescript: 4.5.4
 
 packages:
 
@@ -1161,7 +1161,7 @@ packages:
     resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==}
     dev: false
 
-  /tsup/5.11.10_typescript@4.4.4:
+  /tsup/5.11.10_typescript@4.5.4:
     resolution: {integrity: sha512-z8YzbPyF8Vvj37h+TY84AfvlmKZtBTRuWwRETWUbfckMj854WeLkuRQV8vRyoY8bLJQhnKWlLge/3fVbFZGERg==}
     hasBin: true
     peerDependencies:
@@ -1184,7 +1184,7 @@ packages:
       source-map: 0.7.3
       sucrase: 3.20.3
       tree-kill: 1.2.2
-      typescript: 4.4.4
+      typescript: 4.5.4
     transitivePeerDependencies:
       - supports-color
       - ts-node
@@ -1194,8 +1194,8 @@ packages:
     resolution: {integrity: sha512-WTwtzR0EXFidHrrzyWYyb+jeFLxOVLW1VMaKOqN/JekdqJs6UiFLGv0QjKV2dzn1ub3VI7duDJ/ZXHM8UX/3dw==}
     dev: false
 
-  /typescript/4.4.4:
-    resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+  /typescript/4.5.4:
+    resolution: {integrity: sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
