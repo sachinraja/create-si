@@ -4,7 +4,7 @@ specifiers:
   '@swc/cli': 0.1.55
   '@swc/core': 1.2.127
   '@swc/register': 0.1.9
-  '@types/node': 16.11.17
+  '@types/node': 16.11.19
   '@types/simple-icons': 5.8.0
   '@types/svgo': 2.6.0
   chalk: ^4.1.2
@@ -32,7 +32,7 @@ devDependencies:
   '@swc/cli': 0.1.55_@swc+core@1.2.127
   '@swc/core': 1.2.127
   '@swc/register': 0.1.9_@swc+core@1.2.127
-  '@types/node': 16.11.17
+  '@types/node': 16.11.19
   '@types/simple-icons': 5.8.0
   '@types/svgo': 2.6.0
   prettier: 2.5.1
@@ -246,8 +246,8 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: false
 
-  /@types/node/16.11.17:
-    resolution: {integrity: sha512-C1vTZME8cFo8uxY2ui41xcynEotVkczIVI5AjLmy5pkpBv/FtG+jhtOlfcPysI8VRVwoOMv6NJm44LGnoMSWkw==}
+  /@types/node/16.11.19:
+    resolution: {integrity: sha512-BPAcfDPoHlRQNKktbsbnpACGdypPFBuX4xQlsWDE7B8XXcfII+SpOLay3/qZmCLb39kV5S1RTYwXdkx2lwLYng==}
     dev: true
 
   /@types/simple-icons/5.8.0:
@@ -257,7 +257,7 @@ packages:
   /@types/svgo/2.6.0:
     resolution: {integrity: sha512-VSdhb3KTOglle1SLQD4+TB6ezj/MS3rN98gOUkXzbTUhG8VjFKHXN3OVgEFlTnW5fYBxt+lzZlD3PFqkwMj36Q==}
     dependencies:
-      '@types/node': 16.11.17
+      '@types/node': 16.11.19
     dev: true
 
   /ansi-colors/4.1.1:
